@@ -8,5 +8,5 @@
  가장 빠른 해결법은 매니페스트에 android:usesCleartextTraffic="true"를 추가해주는것이다.
 
 - 그리고 socket failed: eperm (operation not permitted) 이거 
-- 예뮬에서 실험할거면 <uses-permission android:name="android.permission.INTERNET"/> 이 퍼미션 넣기전에 앱을 실행 시켰다면
+- 예뮬에서 실험할거면 uses-permission android:name="android.permission.INTERNET 이 퍼미션 넣기전에 앱을 실행 시켰다면
 - 앱을 삭제하고 다시 실행해야 적용된다 잊지말자!
