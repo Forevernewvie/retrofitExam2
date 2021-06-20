@@ -4,7 +4,7 @@
 ### - 3시간을 헤맨점
 - 모든 코드가 완벽하게 작동했지만
 - 영화진흥원 사이트 api가 https가 아니라 http라
--CLEARTEXT communication to www.kobis.or.kr not permitted by network security policy라는 에러가 떴다 내가 이걸 log로 확인을 안해가지고 한참 헤맸다
+-CLEARTEXT communication to www.kobis.or.kr not permitted by network security policy라는 에러가 떴다 이것 때문에 연결자체가 안됐다. 내가 이걸 log로 확인을 안해가지고 한참 헤맸다
  가장 빠른 해결법은 매니페스트에 android:usesCleartextTraffic="true"를 추가해주는것이다.
 
 - 그리고 socket failed: eperm (operation not permitted) 이거 
