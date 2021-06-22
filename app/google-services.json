@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "185884368709",
+    "firebase_url": "https://nextlevel-534cf-default-rtdb.firebaseio.com",
+    "project_id": "nextlevel-534cf",
+    "storage_bucket": "nextlevel-534cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185884368709:android:8728fa101f562a2485682c",
+        "android_client_info": {
+          "package_name": "com.jaebin.retrofitexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185884368709-juiosq7a7k7ibpd2oqdqkvt9mb6av7u5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jaebin.retrofitexample",
+            "certificate_hash": "65899f3dc1cf4e131893a65c8c762251dfac8ec8"
+          }
+        },
+        {
+          "client_id": "185884368709-hen0v5eafovhlm5be4jo3k8lmhd5hpc8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDer6uQt7vH36AEUqpEwMgUD8neAAmY_uw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185884368709-hen0v5eafovhlm5be4jo3k8lmhd5hpc8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

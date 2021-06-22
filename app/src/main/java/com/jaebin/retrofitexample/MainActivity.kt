@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         call.enqueue(
             object:Callback<Result>{
                 override fun onResponse(call: Call<Result>, response: Response<Result>) {
-
                     val data: Result = response.body()!!
                     val boxOffice: BoxOfficeResult = data.boxOfficeResult
                     binding.recycle.adapter = RecyclerAdapter(boxOffice.dailyBoxOfficeList)
