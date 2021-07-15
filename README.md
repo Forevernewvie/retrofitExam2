@@ -1,6 +1,12 @@
 # retrofitExam2
 레트로핏연습 + 파베 연동
 
+
+<img width="90% src="https://user-images.githubusercontent.com/53516129/125808106-8fcf7498-1f11-4ac3-9774-e9e46258fa25.JPG"/>
+
+
+
+
 ### - 3시간을 헤맨점
 - 모든 코드가 완벽하게 작동했지만
 - 영화진흥원 사이트 api가 https가 아니라 http라
