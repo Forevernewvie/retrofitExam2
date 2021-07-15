@@ -2,7 +2,7 @@
 레트로핏연습 + 파베 연동
 
 
-https://user-images.githubusercontent.com/53516129/125808106-8fcf7498-1f11-4ac3-9774-e9e46258fa25.JPG
+<Img src="https://user-images.githubusercontent.com/53516129/125808106-8fcf7498-1f11-4ac3-9774-e9e46258fa25.JPG" />
 
 
 
