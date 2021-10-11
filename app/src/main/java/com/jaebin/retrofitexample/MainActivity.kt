@@ -1,53 +1,68 @@
 package com.jaebin.retrofitexample
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jaebin.retrofitexample.data.BoxOfficeResult
-import com.jaebin.retrofitexample.data.DailyBoxOffice
-import com.jaebin.retrofitexample.data.Result
+import androidx.recyclerview.widget.RecyclerView
+import com.jaebin.retrofitexample.contract.BoxOfficeContract
 import com.jaebin.retrofitexample.databinding.ActivityMainBinding
-import com.jaebin.retrofitexample.recycler.RecyclerAdapter
-import com.jaebin.retrofitexample.retrofit.RetrofitClient
-import com.jaebin.retrofitexample.retrofit.movieApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.jaebin.retrofitexample.presenter.BoxOfficePresenter
+import com.jaebin.retrofitexample.recycler.BoxOfficeAdapter
+import org.koin.android.ext.android.inject
+import org.koin.core.component.inject
+import org.koin.java.KoinJavaComponent.inject
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),BoxOfficeContract.View, View.OnClickListener {
     private var mBinding:ActivityMainBinding?=null
     private val binding get() = mBinding!!
+
+    private var moviePresenter: BoxOfficePresenter? = null
+    private val movieAdapter : BoxOfficeAdapter by inject()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-        binding.recycle.layoutManager = LinearLayoutManager(this)
-
-
-        val call: Call<Result> = RetrofitClient.service.getMovieList(movieApi.key, movieApi.targetDt)
-        call.enqueue(
-            object:Callback<Result>{
-                override fun onResponse(call: Call<Result>, response: Response<Result>) {
-                    val data: Result = response.body()!!
-                    val boxOffice: BoxOfficeResult = data.boxOfficeResult
-                    binding.recycle.adapter = RecyclerAdapter(boxOffice.dailyBoxOfficeList)
-                    binding.recycle.setHasFixedSize(true)
-                }
-
-                override fun onFailure(call: Call<Result>, t: Throwable) {
-                    Log.d("fail", "onFailure: 실패")
-                }
-
-            }
-        )
+        initUI()
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding=null
+    }
+
+    private fun initUI(){
+        binding.btn.setOnClickListener(this)
+        binding.recycle.layoutManager = LinearLayoutManager(this)
+        binding.recycle.setHasFixedSize(true)
+        binding.recycle.adapter = movieAdapter
+        moviePresenter = BoxOfficePresenter(this)
+        moviePresenter?.setMovieAdapterView(movieAdapter)
+        moviePresenter?.setMovieAdapterModel(movieAdapter)
+
+    }
+
+    override fun showToast(msg: String) {
+        this.showToastMsg(msg)
+    }
+
+    override fun onResponseFailure(errMsg: String) {
+        this.showToastMsg(errMsg)
+    }
+
+    override fun onClick(v: View?) {
+        if (v != null) {
+            when(v.id){
+                binding.btn.id ->
+                    moviePresenter?.requestMovieDataFromApi()
+            }
+        }
+    }
 
 
 }
