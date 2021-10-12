@@ -1,7 +1,6 @@
 package com.jaebin.retrofitexample.contract
 
-import android.widget.AdapterView
-import com.jaebin.retrofitexample.model.DailyBoxOffice
+import com.jaebin.retrofitexample.data.DailyBoxOffice
 
 interface BoxOfficeAdapterContract {
 
@@ -12,7 +11,7 @@ interface BoxOfficeAdapterContract {
 
     interface Model{
         fun setData(contents:List<DailyBoxOffice>)
-        fun getData(pos:Int):DailyBoxOffice
+        fun getData(pos:Int): DailyBoxOffice
     }
 
 }

@@ -1,4 +1,4 @@
-package com.jaebin.retrofitexample.model
+package com.jaebin.retrofitexample.data
 
 import com.google.gson.annotations.SerializedName
 

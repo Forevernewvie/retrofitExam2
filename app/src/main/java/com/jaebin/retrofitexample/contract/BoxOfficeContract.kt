@@ -1,6 +1,6 @@
 package com.jaebin.retrofitexample.contract
 
-import com.jaebin.retrofitexample.model.DailyBoxOffice
+import com.jaebin.retrofitexample.data.DailyBoxOffice
 
 interface BoxOfficeContract {
 
@@ -10,7 +10,6 @@ interface BoxOfficeContract {
             fun onFailure(errMsg: String)
         }
 
-        fun getBoxOfficeMovieList(onSuccessListener: OnSuccessListener)
 
     }
 
@@ -20,6 +19,7 @@ interface BoxOfficeContract {
     }
 
     interface Presenter{
+        fun requestMovieList()
         fun onDestroy()
         fun requestMovieDataFromApi()
         fun setMovieAdapterModel(model :BoxOfficeAdapterContract.Model)

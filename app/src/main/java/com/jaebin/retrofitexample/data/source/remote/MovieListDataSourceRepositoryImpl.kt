@@ -1,33 +1,33 @@
-package com.jaebin.retrofitexample.model
+package com.jaebin.retrofitexample.data.source.remote
 
 import android.util.Log
-import android.widget.Toast
 import com.jaebin.retrofitexample.KEY
 import com.jaebin.retrofitexample.TARGET_DT
 import com.jaebin.retrofitexample.contract.BoxOfficeContract
-import com.jaebin.retrofitexample.myApp
-import com.jaebin.retrofitexample.recycler.BoxOfficeAdapter
-import com.jaebin.retrofitexample.repository.MovieListRepository
+import com.jaebin.retrofitexample.data.BoxOfficeResult
+import com.jaebin.retrofitexample.data.Result
+import com.jaebin.retrofitexample.retrofit.MovieApiService
 import org.koin.android.ext.koin.ERROR_MSG
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
-class BoxOfficeListModel : BoxOfficeContract.Model,KoinComponent {
+class MovieListDataSourceRepositoryImpl(private val service: MovieApiService):  KoinComponent,
+    MovieListDataSource {
 
-    private val model:MovieListRepository by inject()
-    var movies: List<DailyBoxOffice> = arrayListOf()
+    override fun getBoxOfficeMovieList(
+        key: String,
+        targetDT: String,
+        onSuccessListener: BoxOfficeContract.Model.OnSuccessListener
+    ) {
 
-    override fun getBoxOfficeMovieList(onSuccessListener: BoxOfficeContract.Model.OnSuccessListener) {
-        model.getMovieList(KEY,TARGET_DT).enqueue(object: retrofit2.Callback<Result>{
+        service.getMovieList(KEY, TARGET_DT).enqueue(object: retrofit2.Callback<Result>{
             override fun onResponse(call: Call<Result>, response: Response<Result>) {
                 if(response.isSuccessful){
                     val data: Result = response.body()!!
                     val boxOffice: BoxOfficeResult = data.boxOfficeResult
-                    movies = boxOffice.dailyBoxOfficeList
-                    onSuccessListener.onSuccess(movies)
+                    onSuccessListener.onSuccess( boxOffice.dailyBoxOfficeList)
                 }
             }
 
@@ -37,4 +37,5 @@ class BoxOfficeListModel : BoxOfficeContract.Model,KoinComponent {
             }
         })
     }
+
 }

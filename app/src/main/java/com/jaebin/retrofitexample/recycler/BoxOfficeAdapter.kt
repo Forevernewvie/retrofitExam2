@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jaebin.retrofitexample.contract.BoxOfficeAdapterContract
 import com.jaebin.retrofitexample.contract.OnItemClick
-import com.jaebin.retrofitexample.model.DailyBoxOffice
+import com.jaebin.retrofitexample.data.DailyBoxOffice
 import com.jaebin.retrofitexample.databinding.MoviecardBinding
 
 class BoxOfficeAdapter :RecyclerView.Adapter<BoxOfficeAdapter.ViewHolder>(),

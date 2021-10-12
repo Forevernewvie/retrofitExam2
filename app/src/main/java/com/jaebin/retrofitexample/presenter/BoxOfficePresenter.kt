@@ -1,28 +1,40 @@
 package com.jaebin.retrofitexample.presenter
 
+import com.jaebin.retrofitexample.KEY
+import com.jaebin.retrofitexample.TARGET_DT
 import com.jaebin.retrofitexample.contract.BoxOfficeAdapterContract
 import com.jaebin.retrofitexample.contract.BoxOfficeContract
 import com.jaebin.retrofitexample.contract.OnItemClick
-import com.jaebin.retrofitexample.model.BoxOfficeListModel
-import com.jaebin.retrofitexample.model.DailyBoxOffice
+import com.jaebin.retrofitexample.data.DailyBoxOffice
+import com.jaebin.retrofitexample.data.source.MovieListRepository
+import com.jaebin.retrofitexample.data.source.MovieListRepositoryImpl
+import com.jaebin.retrofitexample.data.source.remote.MovieListDataSourceRepositoryImpl
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.java.KoinJavaComponent.inject
 
-class BoxOfficePresenter():BoxOfficeContract.Presenter,OnItemClick,BoxOfficeContract.Model.OnSuccessListener {
+class BoxOfficePresenter():BoxOfficeContract.Presenter,OnItemClick,BoxOfficeContract.Model.OnSuccessListener,KoinComponent {
     private var view: BoxOfficeContract.View? = null
-    private var model: BoxOfficeContract.Model? = null
     private var adapterModel: BoxOfficeAdapterContract.Model? = null
     private var adapterView: BoxOfficeAdapterContract.View? = null
+    private val movieListRepository: MovieListRepositoryImpl by inject()
 
    constructor(view: BoxOfficeContract.View?):this() {
         this.view = view
-        this.model = BoxOfficeListModel()
+
     }
+
+    override fun requestMovieList() {
+        movieListRepository.getMovieList(KEY, TARGET_DT,this)
+    }
+
 
     override fun onDestroy() {
         view = null
     }
 
     override fun requestMovieDataFromApi() {
-        model?.getBoxOfficeMovieList(this)
+        requestMovieList()
     }
 
     override fun setMovieAdapterModel(model: BoxOfficeAdapterContract.Model) {
